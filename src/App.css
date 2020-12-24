@@ -1,38 +1,102 @@
-.App {
-  text-align: center;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+:root {
+	--head-color: #cec5aa;
+	--main-color: #eaeaea;
+	--card-back-color: #b088f9;
+	--width-color: #da9ff9;
+	--font-color: #524a50;
+	--main-font: 'Wallpoet', cursive;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+	background: var(--main-color);
+	color: var(--font-color);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+html {
+	font-size: 18px;
+	font-family: 'Wallpoet', cursive;
+	text-transform: uppercase;
 }
 
-.App-link {
-  color: #61dafb;
+.btn {
+	padding: 0.5rem 2rem;
+	background-color: #ea7570;
+	border: 1px solid #ea7570;
+	border-radius: 4px;
+	color: white;
+	text-transform: uppercase;
+	font-family: 'Wallpoet', cursive;
+	outline: none;
+	transition: 0.7s;
+	transform: scale(1);
+	margin-bottom: 0.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn:active {
+	transform: scale(0.95);
+	transition: transform 0.2s;
+	background-color: transparent;
+	border: 1px solid #ea7570;
+	color: var(--font-color);
+}
+.btn:disabled {
+	opacity: 0.5;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100%;
+}
+
+.form-container h1 {
+	margin-bottom: 4rem;
+	text-align: center;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #ccc;
+	max-width: 18rem;
+	height: 20rem;
+	justify-content: center;
+	background: var(--head-color);
+	border-radius: 5px;
+	margin-bottom: 4rem;
+}
+
+.form h1 {
+	text-align: left;
+	margin-left: 1.5rem;
+	margin-bottom: 2rem;
+}
+
+.form input {
+	margin: 0 1.5rem;
+	font-family: var(--main-font);
+}
+
+.form .invalid-error {
+	position: relative;
+	margin-left: 1.5rem;
+	margin-right: 1rem;
+	font-size: 0.6rem;
+	margin-bottom: 1rem;
+	margin-top: 0.5rem;
+	color: red;
+}
+
+.form button {
+	width: 7.5rem;
+	margin-left: 1.5rem;
 }
