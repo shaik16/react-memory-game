@@ -1,0 +1,24 @@
+.btn {
+	padding: 0.5rem 2rem;
+	background-color: #ea7570;
+	border: 1px solid #ea7570;
+	border-radius: 4px;
+	color: white;
+	text-transform: uppercase;
+	font-family: 'Wallpoet', cursive;
+	outline: none;
+	transition: 0.7s;
+	transform: scale(1);
+	margin-bottom: 0.5rem;
+}
+
+.btn:active {
+	transform: scale(0.95);
+	transition: transform 0.2s;
+	background-color: transparent;
+	border: 1px solid #ea7570;
+	color: var(--font-color);
+}
+.btn:disabled {
+	opacity: 0.5;
+}

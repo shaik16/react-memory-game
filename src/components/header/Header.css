@@ -1,0 +1,73 @@
+header {
+	height: 10%;
+	width: 100%;
+	background-color: var(--head-color);
+}
+
+.head-container {
+	max-width: 950px;
+	margin: 0 auto;
+	display: grid;
+	grid-gap: 0.5rem;
+}
+
+.head-container h2 {
+	justify-self: center;
+	color: var(--font-color);
+}
+
+.game-control {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding-bottom: 0.5rem;
+	color: var(--font-color);
+}
+
+.mid-view {
+	display: none;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0.5rem 1rem;
+	color: var(--font-color);
+}
+
+.ham-icon,
+.close-icon {
+	width: 1.5rem;
+	height: 1.5rem;
+	border-radius: 0;
+}
+
+.close-icon {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.card {
+		width: 4rem;
+		height: 6rem;
+	}
+	.game-control {
+		display: none;
+	}
+	.mid-view {
+		display: flex;
+	}
+
+	.pop-up {
+		display: none;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+		position: absolute;
+		top: 15%;
+		left: 10%;
+		background: #bedc62;
+		z-index: 1;
+		width: 80%;
+		height: 10rem;
+		border-radius: 5px;
+		color: var(--font-color);
+	}
+}
