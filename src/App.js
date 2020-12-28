@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Welcome from './components/welcome-game/Welcome';
-import Game from './components/game/Game';
+import Auth from './components/Auth/Auth';
 export class App extends Component {
 	state = {
 		startStatus: false,
@@ -23,11 +22,7 @@ export class App extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.startStatus ? (
-					<Game level={this.state.level} />
-				) : (
-					<Welcome value={this.state.level} handleLevel={this.handleLevel} onClick={this.handleStart} />
-				)}
+				<Auth />
 			</div>
 		);
 	}

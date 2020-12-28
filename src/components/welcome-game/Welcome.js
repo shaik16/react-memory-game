@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Leaderboard from '../leaderboard/Leaderboard';
 import Button from '../ui/button/Button';
 import './Welcome.css';
-
 export class Welcome extends Component {
 	render() {
 		return (
@@ -16,8 +17,11 @@ export class Welcome extends Component {
 						<option value='2'>medium</option>
 						<option value='3'>hard</option>
 					</select>
-					<Button title='START' onClick={this.props.onClick} />
+					<Link to='/gamestart'>
+						<Button title='START' onClick={this.props.onClick} />
+					</Link>
 				</div>
+				<Leaderboard />
 			</div>
 		);
 	}
