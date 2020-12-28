@@ -36,6 +36,7 @@ html {
 	transition: 0.7s;
 	transform: scale(1);
 	margin-bottom: 0.5rem;
+	margin-left: 0.5rem;
 }
 
 .btn:active {
@@ -67,12 +68,14 @@ html {
 	display: flex;
 	flex-direction: column;
 	border: 1px solid #ccc;
-	max-width: 18rem;
+	min-width: 20rem;
+	min-height: 23rem;
 	height: auto;
 	justify-content: center;
 	background: var(--head-color);
 	border-radius: 5px;
 	margin-bottom: 4rem;
+	box-shadow: 3px 3px 5px #ccc;
 }
 
 .form h1 {
@@ -84,6 +87,7 @@ html {
 
 .form input {
 	margin: 0 1.5rem;
+	padding: 0.6rem;
 	font-family: var(--main-font);
 }
 
@@ -115,6 +119,7 @@ html {
 .form .signup-router,
 .form .login-router {
 	margin-left: 1.5rem;
+	margin-right: 1.5rem;
 }
 
 .form .signup-router,

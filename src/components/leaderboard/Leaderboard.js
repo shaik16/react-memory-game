@@ -14,7 +14,7 @@ export class Leaderboard extends Component {
 
 	componentDidMount() {
 		axios
-			.get('http://localhost:4000/api/', {
+			.get('https://react-memory-game-api.herokuapp.com/api/', {
 				headers: {
 					Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
 				},
@@ -29,6 +29,7 @@ export class Leaderboard extends Component {
 				const hard = res.data.filter((obj) => {
 					return obj.level === 3;
 				});
+
 				this.setState({
 					easy,
 					medium,
@@ -40,6 +41,26 @@ export class Leaderboard extends Component {
 					redirect: true,
 				});
 			});
+	}
+
+	componentDidUpdate() {
+		if (this.state.easy.length > 0) {
+			localStorage.setItem('easyScore', this.state.easy[0].highscore);
+		} else {
+			localStorage.setItem('easyScore', '');
+		}
+
+		if (this.state.medium.length > 0) {
+			localStorage.setItem('mediumScore', this.state.medium[0].highscore);
+		} else {
+			localStorage.setItem('mediumScore', '');
+		}
+
+		if (this.state.hard.length > 0) {
+			localStorage.setItem('hardScore', this.state.hard[0].highscore);
+		} else {
+			localStorage.setItem('hardScore', '');
+		}
 	}
 
 	render() {

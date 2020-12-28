@@ -1,12 +1,44 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import ConfirmationBox from '../confirmationBox/ConfirmationBox';
 import Leaderboard from '../leaderboard/Leaderboard';
 import Button from '../ui/button/Button';
 import './Welcome.css';
 export class Welcome extends Component {
+	state = {
+		redirect: false,
+		confirmation: false,
+	};
+
+	onClick = (logout) => {
+		this.setState({
+			confirmation: true,
+		});
+	};
+
+	onYes = (yes) => {
+		if (yes) {
+			localStorage.clear();
+			this.setState({
+				redirect: true,
+			});
+		}
+	};
+	onNo = (no) => {
+		if (no) {
+			this.setState({
+				confirmation: false,
+			});
+		}
+	};
 	render() {
 		return (
 			<div className='welcome-container'>
+				{this.state.redirect ? <Redirect to='/login' /> : null}
+				<ConfirmationBox hide={this.state.confirmation} onYes={this.onYes} onNo={this.onNo} />
+				<div className='logout'>
+					<Button className='logout' title='Logout' onClick={this.onClick} />
+				</div>
 				<img src='https://media.giphy.com/media/2shcntnDOwJkLGdB83/giphy.gif' alt='' />
 				<h1>Welcome!</h1>
 				<h4>Select the level and Click on start...</h4>

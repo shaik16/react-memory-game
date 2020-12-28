@@ -18,6 +18,7 @@ export class Login extends Component {
 
 	handleChange = (event) => {
 		event.preventDefault();
+		// eslint-disable-next-line no-useless-escape
 		const validEmailRegex = /(\w+)\@(\w+)\.[a-zA-Z]/;
 
 		const { name, value } = event.target;
@@ -58,15 +59,16 @@ export class Login extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		axios
-			.post('http://localhost:4000/api/login', {
+			.post('https://react-memory-game-api.herokuapp.com/api/login', {
 				email: this.state.email,
 				password: this.state.pass,
 			})
 			.then((res) => {
-				const { id, accessToken, name } = res.data;
+				const { id, accessToken, name, email } = res.data;
 				localStorage.setItem('user_id', id);
 				localStorage.setItem('accessToken', accessToken);
 				localStorage.setItem('user_name', name);
+				localStorage.setItem('email', email);
 				this.setState({
 					redirect: true,
 				});
@@ -117,7 +119,7 @@ export class Login extends Component {
 					</button>
 					<span className='signup-router'>
 						<Link className='link' to='/signup'>
-							Dont have an account? Signup
+							Don't have an account? Signup
 						</Link>
 					</span>
 				</form>

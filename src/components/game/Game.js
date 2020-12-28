@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import Header from '../header/Header';
 import Card from '../ui/card/Card';
 import './Game.css';
-
 export class Game extends Component {
 	constructor(props) {
 		super(props);
 		if (this.props.level === 1) {
 			this.gifs = this.shuffle(this.easy);
 			this.cardLength = 6;
+			localStorage.setItem('mode', 'easy');
 		} else if (this.props.level === 2) {
 			this.gifs = this.shuffle(this.medium);
 			this.cardLength = 8;
+			localStorage.setItem('mode', 'medium');
 		} else {
 			this.gifs = this.shuffle(this.hard);
 			this.cardLength = 12;
+			localStorage.setItem('mode', 'hard');
 		}
 	}
 	easy = [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6];
@@ -54,6 +57,30 @@ export class Game extends Component {
 		});
 	};
 
+	highscore = (mode) => {
+		axios
+			.post(
+				'https://react-memory-game-api.herokuapp.com/api/',
+				{
+					email: localStorage.getItem('email'),
+					message: `Congratulations 🎉  ${localStorage.getItem(
+						'user_name'
+					)} your score ${localStorage.getItem('score')} is highest score in ${mode} mode`,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+					},
+				}
+			)
+			.then((res) => {
+				console.log(res.data);
+			})
+			.catch((err) => {
+				console.log(err.response);
+			});
+	};
+
 	componentDidUpdate() {
 		if (this.state.id.length < 2) return;
 		const firstMatched = this.gifs[this.state.id[0]];
@@ -69,6 +96,39 @@ export class Game extends Component {
 				matches: this.state.matches + 1,
 			});
 			if (this.state.matches + 1 === this.cardLength) {
+				localStorage.setItem('score', this.state.score);
+				if (localStorage.getItem('mode') === 'easy') {
+					if (Number(localStorage.getItem('easyScore')) < this.state.score)
+						this.highscore(localStorage.getItem('mode'));
+				}
+				if (localStorage.getItem('mode') === 'medium') {
+					if (Number(localStorage.getItem('mediumScore')) < this.state.score)
+						this.highscore(localStorage.getItem('mode'));
+				}
+				if (localStorage.getItem('mode') === 'hard') {
+					if (Number(localStorage.getItem('hardScore')) < this.state.score)
+						this.highscore(localStorage.getItem('mode'));
+				}
+				axios
+					.post(
+						'https://react-memory-game-api.herokuapp.com/api',
+						{
+							level: this.props.level,
+							score: this.state.score,
+							user_id: localStorage.getItem('user_id'),
+						},
+						{
+							headers: {
+								Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+							},
+						}
+					)
+					.then((res) => {
+						console.log(res.data);
+					})
+					.catch((err) => {
+						console.log(err.response);
+					});
 				setTimeout(() => {
 					this.setState({
 						redirect: true,
@@ -86,6 +146,7 @@ export class Game extends Component {
 			}, 1000);
 		}
 	}
+
 	render() {
 		return (
 			<div>

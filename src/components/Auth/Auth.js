@@ -44,7 +44,11 @@ export class Auth extends Component {
 						</Route>
 						<Route path='/gameover'>
 							<Protected>
-								<GameOver value={this.state.level} onClick={this.handleStart} />
+								<GameOver
+									value={this.state.level}
+									handleLevel={this.handleLevel}
+									onClick={this.handleStart}
+								/>
 							</Protected>
 						</Route>
 					</Switch>
